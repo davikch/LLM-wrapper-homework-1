@@ -5,24 +5,23 @@ from typing import Literal
 from pathlib import Path
 
 class ToneResponse(BaseModel):
-    tone: Literal['positive', 'negative']
-    confidence: float
+    tone: Literal['positive', 'negative', 'invalidInput']
 
-for review in Path.cwd().glob('reviews/*'):
+for review in Path.cwd().glob('reviews/*.txt'):
     review_text = open(review).read()
     response = chat(
       messages=[
         {
           'role': 'user',
           'content': f'''
-          {review_text}
+          The following text is a movie review. Check if it has a positive or a negative tone. If the input doesn't look like a review, instead of 'positive' or 'negative' tone, say 'invalidInput'.
 
-          Is this a negative or a positive movie review? Provide tone and confidence values.
+          {review_text}
           ''',
         }
       ],
-      model='llama3',
-      options={'temperature': 0.3},
+      model='llama3.2:1b',
+      options={'temperature': 0.2},
       format=ToneResponse.model_json_schema(),
     )
 
