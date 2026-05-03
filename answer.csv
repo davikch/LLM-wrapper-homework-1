@@ -1,0 +1,9 @@
+File,Verdict
+1.txt,tone='negative'
+2.txt,tone='positive'
+3.txt,tone='positive'
+4.txt,tone='positive'
+5.txt,tone='positive'
+6.txt,tone='negative'
+7.txt,tone='invalidInput'
+8.txt,tone='negative'
